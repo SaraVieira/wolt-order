@@ -80,7 +80,7 @@ export default function Example({ places = [] }) {
           role="list"
           className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
         >
-          {orderedPlaces.map((file) => (
+          {(orderedPlaces || []).map((file) => (
             <a
               key={file.track_id}
               href={`https://wolt.com/en/deu/berlin/restaurant/${file.venue.slug}`}

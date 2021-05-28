@@ -30,7 +30,7 @@ export default function Example({ categories = [] }) {
         role="list"
         className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
       >
-        {categories.map((file) => (
+        {(categories || []).map((file) => (
           <Link
             key={file.track_id}
             href={`/category/${file.link.target.split(":berlin")[0]}`}
