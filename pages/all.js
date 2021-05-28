@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import absoluteUrl from "next-absolute-url";
 
-export default function Example({ places }) {
+export default function Example({ places = [] }) {
   const [orderedPlaces, setOrderedPlaces] = useState(places);
   const [order, setOrder] = useState("time");
 

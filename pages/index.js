@@ -1,7 +1,7 @@
 import Link from "next/link";
 import absoluteUrl from "next-absolute-url";
 
-export default function Example({ categories }) {
+export default function Example({ categories = [] }) {
   return (
     <main>
       <Link href="/all">
