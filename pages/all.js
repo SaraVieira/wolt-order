@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import absoluteUrl from "next-absolute-url";
+import getLocation from "../utils/getLocation";
 
 export default function Example({ places = [] }) {
   const [orderedPlaces, setOrderedPlaces] = useState(places);
@@ -123,7 +124,10 @@ export default function Example({ places = [] }) {
 
 export async function getServerSideProps(context) {
   const { origin } = absoluteUrl(context.req);
-  const a = await fetch(`${origin}/api/all`).then((rsp) => rsp.json());
+  const { lon, lat } = await getLocation(context.req);
+  const a = await fetch(`${origin}/api/all?lat=${lat}&lon=${lon}`).then((rsp) =>
+    rsp.json()
+  );
 
   const places = a
     .sort((placeA, placeB) => {

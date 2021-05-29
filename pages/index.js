@@ -1,6 +1,7 @@
 import Link from "next/link";
 import absoluteUrl from "next-absolute-url";
-import axios from "axios";
+
+import getLocation from "../utils/getLocation";
 export default function Example({ categories = [] }) {
   return (
     <main>
@@ -64,17 +65,12 @@ export default function Example({ categories = [] }) {
 }
 
 export async function getServerSideProps({ req }) {
-  const ip =
-    req.headers["x-real-ip"] ||
-    req.headers["x-forwarded-for"] ||
-    req.connection.remoteAddress;
-  const usableIp = ip.includes(",") ? ip.split(",")[0] : ip;
-  const { data } = await axios(`http://ip-api.com/json/${usableIp}`);
-  console.log(data);
   const { origin } = absoluteUrl(req);
-  const categories = await fetch(`${origin}/api/categories`).then((rsp) =>
-    rsp.json()
-  );
+  const { lon, lat } = await getLocation(req);
+  const categories =
+    (await fetch(`${origin}/api/categories?lat=${lat}&lon=${lon}`).then((rsp) =>
+      rsp.json()
+    )) || [];
   return {
     props: { categories }, // will be passed to the page component as props
   };

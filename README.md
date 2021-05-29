@@ -5,6 +5,6 @@ Fixes my only issue with wolt basically
 ## Environment variables needed
 
 ```
-LAT=YOUR-LATITUDE
-LON=YOUR-LAGITUDE
+NEXT_PUBLIC_LAT=YOUR-LATITUDE
+NEXT_PUBLIC_LON=YOUR-LAGITUDE
 ```
