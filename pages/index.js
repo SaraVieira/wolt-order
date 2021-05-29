@@ -34,7 +34,7 @@ export default function Example({ categories = [] }) {
         {(categories || []).map((file) => (
           <Link
             key={file.track_id}
-            href={`/category/${file.link.target.split(":berlin")[0]}`}
+            href={`/category/${file.link.target.split(":")[0]}`}
           >
             <li className="relative">
               <div className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
