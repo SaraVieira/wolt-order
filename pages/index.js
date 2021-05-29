@@ -1,6 +1,6 @@
 import Link from "next/link";
 import absoluteUrl from "next-absolute-url";
-
+import axios from "axios";
 export default function Example({ categories = [] }) {
   return (
     <main>
