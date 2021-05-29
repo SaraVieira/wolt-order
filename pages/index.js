@@ -70,11 +70,15 @@ export default function Example({ categories = [] }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const ip = requestIp.getClientIp(context.req);
-  const geo = geoip.lookup(ip);
-  console.log(ip);
-  const { origin } = absoluteUrl(context.req);
+export async function getServerSideProps({ req }) {
+  const ip =
+    req.headers["x-real-ip"] ||
+    req.headers["x-forwarded-for"] ||
+    req.connection.remoteAddress;
+  const usableIp = ip.includes(",") ? ip.split(",")[0] : ip;
+  const { data } = await axios(`http://ip-api.com/json/${usableIp}`);
+  console.log(data);
+  const { origin } = absoluteUrl(req);
   const categories = await fetch(`${origin}/api/categories`).then((rsp) =>
     rsp.json()
   );
