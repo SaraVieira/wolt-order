@@ -1,14 +1,7 @@
 import Link from "next/link";
 import absoluteUrl from "next-absolute-url";
-import requestIp from "request-ip";
-import geoip from "geoip-lite";
+
 export default function Example({ categories = [] }) {
-  if (
-    typeof window !== "undefined" &&
-    !localStorage.getItem("location-wolt-order")
-  ) {
-    return "sup";
-  }
   return (
     <main>
       <Link href="/all">
