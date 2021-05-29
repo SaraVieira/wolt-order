@@ -1,7 +1,14 @@
 import Link from "next/link";
 import absoluteUrl from "next-absolute-url";
-
+import requestIp from "request-ip";
+import geoip from "geoip-lite";
 export default function Example({ categories = [] }) {
+  if (
+    typeof window !== "undefined" &&
+    !localStorage.getItem("location-wolt-order")
+  ) {
+    return "sup";
+  }
   return (
     <main>
       <Link href="/all">
@@ -64,6 +71,9 @@ export default function Example({ categories = [] }) {
 }
 
 export async function getServerSideProps(context) {
+  const ip = requestIp.getClientIp(context.req);
+  const geo = geoip.lookup(ip);
+  console.log(ip);
   const { origin } = absoluteUrl(context.req);
   const categories = await fetch(`${origin}/api/categories`).then((rsp) =>
     rsp.json()
