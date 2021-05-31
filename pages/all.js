@@ -124,7 +124,7 @@ export default function Example({ places = [] }) {
 
 export async function getServerSideProps(context) {
   const { origin } = absoluteUrl(context.req);
-  const { lon, lat } = await getLocation(context.req);
+  const { lat, lon } = await getLocation(context.req);
   const a =
     (await fetch(`${origin}/api/all?lat=${lat}&lon=${lon}`).then((rsp) =>
       rsp.json()

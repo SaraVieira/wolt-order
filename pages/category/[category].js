@@ -124,7 +124,7 @@ export default function Example({ places = [], cat = "" }) {
 
 export async function getServerSideProps(context) {
   const { origin } = absoluteUrl(context.req);
-  const { lon, lat } = await getLocation(context.req);
+  const { lat, lon } = await getLocation(context.req);
   const a =
     (await fetch(
       `${origin}/api/category?id=${context.params.category}&lat=${lat}&lon=${lon}`

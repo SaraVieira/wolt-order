@@ -66,7 +66,7 @@ export default function Example({ categories = [] }) {
 
 export async function getServerSideProps({ req }) {
   const { origin } = absoluteUrl(req);
-  const { lon, lat } = await getLocation(req);
+  const { lat, lon } = await getLocation(req);
   const categories =
     (await fetch(`${origin}/api/categories?lat=${lat}&lon=${lon}`).then((rsp) =>
       rsp.json()
